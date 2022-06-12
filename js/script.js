@@ -4,7 +4,7 @@ const input = document.querySelector(".input");
 const weatherFun = async function (city = "alexandria") {
   try {
     const data = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=f2032f76b4604baa9fb124727221106&q=${city}&days=3&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=f2032f76b4604baa9fb124727221106&q=${city}&days=3&aqi=no&alerts=no`
     );
 
     const { forecast, location, current } = await data.json();
