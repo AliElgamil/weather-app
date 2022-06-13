@@ -13,9 +13,27 @@ const weatherFun = async function (city = "alexandria") {
 
     const date = new Date(today.date);
 
+    let tomorrowDay, afterTomorrowDay;
+
     const weatherContainer = document.querySelector(".weather-Container");
 
-    console.log(date.getDay(), today.date);
+    const days = () => {
+      if (date.getDay() === 5) {
+        tomorrowDay = dete.getDay() + 1;
+        afterTomorrowDay = 0;
+        return true;
+      } else if (date.getDay() === 6) {
+        tomorrowDay = 0;
+        afterTomorrowDay = tomorrowDay + 1;
+        return true;
+      } else {
+        tomorrowDay = date.getDay() + 1;
+        afterTomorrowDay = date.getDay() + 2;
+
+        return true;
+      }
+    };
+    days();
 
     const weekDays = [
       "Sundays",
@@ -51,7 +69,6 @@ const weatherFun = async function (city = "alexandria") {
     };
 
     input.classList.remove("text-danger");
-    input.classList.add("text-white");
 
     const html = `
             <div class="col-lg-4 forecast p-0">
@@ -97,7 +114,7 @@ const weatherFun = async function (city = "alexandria") {
             <div class="col-lg-4 forecast p-0">
                 <div class='forecast_head'>
                     <p class='m-0 d-flex justify-content-center p-2'>
-                        <span class='day'>${weekDays[date.getDay() + 1]}</span>
+                        <span class='day'>${weekDays[tomorrowDay]}</span>
                     </p>
                 </div>
                 <div class='forecast_body p-2  py-3'>
@@ -121,7 +138,7 @@ const weatherFun = async function (city = "alexandria") {
             <div class="col-lg-4 forecast p-0">
                 <div class='forecast_head'>
                     <p class='m-0 d-flex justify-content-center p-2 '>
-                        <span class='day'>${weekDays[date.getDay() + 2]}</span>
+                        <span class='day'>${weekDays[afterTomorrowDay]}</span>
                     </p>
                 </div>
                 <div class='forecast_body p-2  py-3'>
@@ -146,7 +163,6 @@ const weatherFun = async function (city = "alexandria") {
     weatherContainer.innerHTML = html;
   } catch {
     if (input.classList.contains("text-danger")) return;
-    input.classList.remove("text-white");
     input.classList.add("text-danger");
   }
 };
